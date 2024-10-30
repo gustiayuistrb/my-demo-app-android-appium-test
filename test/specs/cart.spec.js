@@ -1,36 +1,27 @@
-import { driver, $ } from '@wdio/globals'
+import { driver, $ } from '@wdio/globals';
+import cartPage from '../pageobjects/cart.page';
 
 describe('Product quantity and cart functionality', function(){
     beforeEach(async function() {
-        const productImage = $('//*[@content-desc="Product Image"]');
-        await productImage.click();
+        await cartPage.openProduct();
     })
 
     describe('Add to Cart Functionality', function() {
         it('Test add product to cart', async function() {
-            const addToCartButton = $('id=com.saucelabs.mydemoapp.android:id/addToCartBtn');
-            await addToCartButton.click();
-
-            const cartMessage = $('id=com.saucelabs.mydemoapp.android:id/cartMessage');
-            await expect(cartMessage).toHaveText('Product added to cart!');
+            await cartPage.addToCart();
+            await expect(cartPage.cartMessage).toHaveText('Product added to cart!');
         })
     })
 
     describe('Adjust Product Quantity', function() {
         it('Test press quantity plus button', async function() {
-            const qtyPlusButton = $('id=com.saucelabs.mydemoapp.android:id/qtyPlusBtn');
-            await qtyPlusButton.click();
-
-            const quantityDisplay = $('id=com.saucelabs.mydemoapp.android:id/quantityDisplay');
-            await expect(quantityDisplay).toHaveText('2'); 
+            await cartPage.pressQtyPlus();
+            await expect(cartPage.quantityDisplay).toHaveText('2'); 
         })
 
         it('Test press quantity minus button', async function() {
-            const qtyMinusButton = $('id=com.saucelabs.mydemoapp.android:id/qtyMinusBtn');
-            await qtyMinusButton.click();
-
-            const quantityDisplay = $('id=com.saucelabs.mydemoapp.android:id/quantityDisplay');
-            await expect(quantityDisplay).toHaveText('0');
+            await cartPage.pressQtyMinus();
+            await expect(cartPage.quantityDisplay).toHaveText('0');
         })
     })
 
