@@ -31,6 +31,7 @@ This repository contains automated tests for the **My Demo App** using Appium an
 - Node.js
 - Appium
 - Appium Inspector: Used for inspecting UI elements and obtaining element locators (IDs, classes, etc.) from the app.
+- Android Studio 
 - WebdriverIO
 - Java Development Kit (JDK)
 
